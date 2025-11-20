@@ -1,16 +1,21 @@
 //
 //  ReviewPreviewCard.swift
-//  Gooder Reads
+//  GreatReads
 //
 //  Created by James Ball on 8/11/25.
 //
 
+//Rendering for the Xcode preview panel.
 #Preview {
-    ReviewPreviewCard(displayName: "Sadira Austin", rating: 1.5, reviewText: "This book sucks ass!", numLikes: 123, numComments: 45)
+    
+    ContentView()
+        .environmentObject(NavigationModel())
+    
 }
 
 import SwiftUI
 
+//A struct for a Review Preview "card." These appear on a Book's detail page.
 struct ReviewPreviewCard: View {
     
     let displayName: String
@@ -20,8 +25,12 @@ struct ReviewPreviewCard: View {
     let numComments: Int
     
     var body: some View {
+        
         VStack(spacing: 15){
+            
+            //The top line of the review ("James gave 2 stars")
             HStack {
+                
                 Spacer()
                     .frame(width: 15)
                 Image(systemName: "person.circle")
@@ -35,10 +44,12 @@ struct ReviewPreviewCard: View {
                 RatingStars(avgRating: rating, starSize: 15)
                 
                 Spacer()
+                
             }
             
-            
+            //The review preview text
             HStack {
+                
                 Spacer()
                     .frame(width: 55)
                 
@@ -46,9 +57,12 @@ struct ReviewPreviewCard: View {
                     .font(.subheadline)
                 
                 Spacer()
+                
             }
             
+            //Like and Comment buttones
             HStack {
+                
                 Button {
                     
                 } label: {
@@ -72,10 +86,12 @@ struct ReviewPreviewCard: View {
                 
                 Image(systemName: "bubble.fill")
                 Text(String(numComments))
+                
             }
             
             Spacer()
                 .frame(height: 5)
+            
         }
         .overlay(
             Rectangle()

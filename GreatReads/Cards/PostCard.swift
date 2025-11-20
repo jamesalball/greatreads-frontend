@@ -1,23 +1,20 @@
 //
 //  ReviewCard.swift
-//  Gooder Reads
+//  GreatReads
 //
 //  Created by James Ball on 8/4/25.
 //
 import SwiftUI
 
+//Rendering for the Xcode preview panel.
 #Preview {
-    /*let pathState = PathModel()
-    
-    ReviewCard(title: "The Stand", author: "Stephen King", description: "It's a post-apocalypse!", friendName: "Sadira Austin", postType: .review, reviewRating: 4.9)
-    
-    ReviewCard(title: "The Stand", author: "Stephen King", description: "It's a post-apocalypse!", friendName: "Sadira Austin", postType: .pageReached, page: 50, totalPages: 1200)*/
     
     ContentView()
         .environmentObject(NavigationModel())
     
 }
 
+//An enum specifying the different types of Posts.
 enum PostType: String, Codable {
     case review = "review"
     case pageReached = "pageReached"
@@ -25,7 +22,11 @@ enum PostType: String, Codable {
     case comment = "comment"
 }
 
+
+/*A struct that shows a Post "card."
+ Posts include reviews, comments, likes, and more from friends.*/
 struct PostCard: View {
+    
     @EnvironmentObject var navigationModel: NavigationModel
     
     let post: Post
@@ -35,9 +36,11 @@ struct PostCard: View {
         let book = post.book ?? Book(id: "0", title: "", author: "" , description: "", avgRating: 0.0)
         
         VStack {
+            
+            //Specifying content for "review" Posts.
             if post.postType == .review {
-                let formattedRating = String(format: "%.1f", post.reviewRating ?? 0)
                 
+                let formattedRating = String(format: "%.1f", post.reviewRating ?? 0)
                 
                 Text("\(post.userName) gave \(formattedRating) stars to \(book.title)")
                     .font(.subheadline)
@@ -56,9 +59,12 @@ struct PostCard: View {
                     .environmentObject(navigationModel)
             }
             
+            //Specifying content for "page reached" Posts.
             if post.postType == .pageReached {
+                
                 let formattedPage = String(format: "%f", post.page ?? 0)
                 let formattedTotalPages = String(format: "%f", post.totalPages ?? 0)
+                
                 Text("\(post.userName) reached page \(formattedPage) of \(formattedTotalPages) in \(book.title)")
                     .font(.subheadline)
                     .foregroundStyle(.white)
@@ -77,8 +83,9 @@ struct PostCard: View {
             }
             
             
-            
+            //Each post has Like/Comment buttons beneath it.
             HStack {
+                
                 Button {
                     //like action
                 } label : {

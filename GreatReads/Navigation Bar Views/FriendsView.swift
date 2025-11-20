@@ -1,17 +1,21 @@
 //
 //  FriendsView.swift
-//  Gooder Reads
+//  GreatReads
 //
 //  Created by James Ball on 8/4/25.
 //
 
 import SwiftUI
 
+//Rendering for the Xcode preview panel.
 #Preview {
+    
     ContentView()
         .environmentObject(NavigationModel())
+    
 }
 
+//A struct for a feed showing friend activity (Posts).
 struct FriendsView: View {
     
     @EnvironmentObject var navigationModel: NavigationModel
@@ -22,11 +26,12 @@ struct FriendsView: View {
     init(isSearching: FocusState<Bool>.Binding) {
         self._isSearching = isSearching
         
+        //An example JSON string from the API.
         let jsonString = #"""
         [
             {
                 "id": "1",
-                "userName": "Sadira Austin",
+                "userName": "Friend 1",
                 "postType": "review",
                 "book": {
                     "id": "2",
@@ -56,7 +61,7 @@ struct FriendsView: View {
 
             {
                 "id": "3",
-                "userName": "Baby Angel",
+                "userName": "Friend 2",
                 "postType": "review",
                 "book": {
                     "id": "2",
@@ -71,7 +76,7 @@ struct FriendsView: View {
 
             {
                 "id": "4",
-                "userName": "cheezman 99",
+                "userName": "Friend 3",
                 "postType": "review",
                 "book": {
                     "id": "2",
@@ -81,7 +86,7 @@ struct FriendsView: View {
                     "avgRating": 4.2
                 },
                 "reviewRating": 4.0,
-                "reviewText": "crunch bird"
+                "reviewText": "It's good!"
             },
 
             {
@@ -96,7 +101,7 @@ struct FriendsView: View {
                     "avgRating": 4.2
                 },
                 "reviewRating": 1.5,
-                "reviewText": "This book sucks ass!"
+                "reviewText": "This book is bad!"
             },
         ]
         """#
@@ -115,6 +120,7 @@ struct FriendsView: View {
         }
     }
     
+    //The feed itself is a ScrollView containing several Posts.
     var body: some View {
         ScrollView {
             VStack(spacing: 30) {

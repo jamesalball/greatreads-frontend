@@ -1,12 +1,13 @@
 //
 //  Gooder_ReadsApp.swift
-//  Gooder Reads
+//  GreatReads
 //
 //  Created by James Ball on 7/31/25.
 //
 
 import SwiftUI
 
+//Rendering for the Xcode preview panel.
 #Preview {
     
     ContentView()
@@ -14,6 +15,7 @@ import SwiftUI
     
 }
 
+//Background colors
 let gradientColors: [Color] = [
     .gradientTop,
     .nightSkyBlue
@@ -27,17 +29,19 @@ enum SelectedTab {
     case profile
 }
 
+//A model to keep manage the User's navigation.
 class NavigationModel: ObservableObject {
     @Published var tabChoice: SelectedTab = .myBooks
     @Published var path: NavigationPath = NavigationPath()
     @Published var searchText: String = ""
 }
 
+
+//The main struct.
 @main
 struct Gooder_ReadsApp: App {
     
     @StateObject var navigationModel = NavigationModel()
-    
     
     var body: some Scene {
         WindowGroup {
