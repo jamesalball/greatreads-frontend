@@ -1,21 +1,25 @@
 //
 //  ContentView.swift
-//  Gooder Reads
+//  GreatReads
 //
 //  Created by James Ball on 8/4/25.
 //
 
 import SwiftUI
 
+//Rendering for the Xcode preview panel.
 #Preview {
     ContentView()
         .environmentObject(NavigationModel())
 }
 
 enum Destination: Hashable {
+    
     case bookView(book: Book)
+    
 }
 
+//A high-level struct to manage the content displayed on the app.
 struct ContentView: View {
     
     @EnvironmentObject var navigationModel: NavigationModel
@@ -24,13 +28,15 @@ struct ContentView: View {
     private var initData: String = ""
     
     init() {
+        
+        //Testing JSON data.
         self.initData = #"""
             {
                 "friendsActivity": 
                     [
                         {
                             "id": "1",
-                            "userName": "Sadira Austin",
+                            "userName": "Friend 1",
                             "postType": "review",
                             "book": {
                                 "id": "2",
@@ -40,7 +46,7 @@ struct ContentView: View {
                                 "avgRating": 4.2
                             },
                             "reviewRating": 1.5,
-                            "reviewText": "This book sucks ass!"
+                            "reviewText": "This book  is bad!"
                         },
                 
                         {
@@ -60,7 +66,7 @@ struct ContentView: View {
 
                         {
                             "id": "3",
-                            "userName": "Baby Angel",
+                            "userName": "Freind 2",
                             "postType": "review",
                             "book": {
                                 "id": "2",
@@ -70,12 +76,12 @@ struct ContentView: View {
                             "avgRating": 4.2
                             },
                             "reviewRating": 3.5,
-                            "reviewText": "Mrow?"
+                            "reviewText": "It's fine."
                         },
 
                         {
                             "id": "4",
-                            "userName": "cheezman 99",
+                            "userName": "Friend 3",
                             "postType": "review",
                             "book": {
                                 "id": "2",
@@ -85,12 +91,12 @@ struct ContentView: View {
                                 "avgRating": 4.2
                             },
                             "reviewRating": 4.0,
-                            "reviewText": "crunch bird"
+                            "reviewText": "It's good!"
                         },
 
                         {
                             "id": "5",
-                            "userName": "Sadira Austin",
+                            "userName": "Friend 1",
                             "postType": "review",
                             "book": {
                                 "id": "2",
@@ -100,7 +106,7 @@ struct ContentView: View {
                                 "avgRating": 4.2
                             },
                             "reviewRating": 1.5,
-                            "reviewText": "This book sucks ass!"
+                            "reviewText": "This book is bad!"
                         },
                     ],
             "recentSearches":
@@ -159,36 +165,49 @@ struct ContentView: View {
             """#
     }
     
+    //This view manages the navigation stack, search bar, and navigation bar.
     var body: some View {
         
         NavigationStack(path: $navigationModel.path) {
+            
             VStack {
+                
                 Spacer()
                     .frame(height: 50)
                 
                 if navigationModel.searchText != "" || isSearching {
+                    
                     SearchResultsView(isSearching: $isSearching)
                         .environmentObject(navigationModel)
+                    
                 }
                 
                 else if navigationModel.tabChoice == .friends {
+                    
                     FriendsView(isSearching: $isSearching)
                         .environmentObject(navigationModel)
+                    
                 }
                 
                 else if navigationModel.tabChoice == .search {
+                    
                     RecentSearchesView(isSearching: $isSearching)
                         .environmentObject(navigationModel)
+                    
                 }
                 
                 else if navigationModel.tabChoice == .myBooks {
+                    
                     MyBooksView(isSearching: $isSearching)
                         .environmentObject(navigationModel)
+                    
                 }
                 
                 else if !isSearching {
+                    
                     Spacer()
                         .frame(height: 60)
+                    
                 }
                 
                 Spacer()
@@ -197,8 +216,10 @@ struct ContentView: View {
             }
             .navigationDestination(for: Destination.self) { destination in
                 switch destination {
+                    
                 case .bookView(let book):
                     BookView(book: book)
+                    
                 }
             }
             .frame(maxHeight: .infinity)
@@ -207,15 +228,19 @@ struct ContentView: View {
         }
         .safeAreaInset(edge: .bottom) {
             if !isSearching {
+                
                 NavigationBar()
                     .environmentObject(navigationModel)
+                
             }
             
         }
         .navigationBarBackButtonHidden(true)
         .safeAreaInset(edge: .top) {
+            
             Header(isSearching: $isSearching)
                 .environmentObject(navigationModel)
+            
         }
     }
 }

@@ -1,17 +1,19 @@
 //
 //  SearchResultsView.swift
-//  Gooder Reads
+//  GreatReads
 //
 //  Created by James Ball on 8/11/25.
 //
 
 import SwiftUI
 
+//Rendering for the Xcode preview panel.
 #Preview {
     ContentView()
         .environmentObject(NavigationModel())
 }
 
+//A struct to display search results. Still a work in progress.
 struct SearchResultsView: View {
     
     @EnvironmentObject var navigationModel: NavigationModel
@@ -21,7 +23,9 @@ struct SearchResultsView: View {
     var body: some View {
         
         ScrollView {
+            
             VStack {
+                
                 Spacer()
                     .frame(height: 60)
                 
@@ -44,7 +48,5 @@ struct SearchResultsView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        
     }
-    
 }

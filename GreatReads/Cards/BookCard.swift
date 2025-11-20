@@ -1,17 +1,20 @@
 //
 //  BookCard.swift
-//  Gooder Reads
+//  GreatReads
 //
 //  Created by James Ball on 8/4/25.
 //
 import SwiftUI
 
+//Rendering for the Xcode preview panel.
 #Preview {
+    
     ContentView()
         .environmentObject(NavigationModel())
     
 }
 
+//A struct to display a Book "card," offering a high-level summary
 struct BookCard: View {
     
     @EnvironmentObject var navigationModel: NavigationModel
@@ -20,6 +23,7 @@ struct BookCard: View {
     
     var body: some View {
         
+        //The whole card is really a button that will navigate to the Book view.
         Button {
             navigationModel.path.append(Destination.bookView(book: book))
         } label : {
@@ -28,11 +32,13 @@ struct BookCard: View {
     }
 }
 
-
+//A struct that gives high-level details like title, average rating, etc.
 struct BookCardDetails: View {
+    
     let book: Book
     
     var body: some View {
+        
         HStack {
             
             Image(systemName: "book.closed")

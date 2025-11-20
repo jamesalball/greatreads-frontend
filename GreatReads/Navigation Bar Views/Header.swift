@@ -1,11 +1,12 @@
 //
 //  Header.swift
-//  Gooder Reads
+//  GreatReads
 //
 //  Created by James Ball on 8/4/25.
 //
 import SwiftUI
 
+//Rendering for the Xcode preview panel.
 #Preview {
     
     ContentView()
@@ -13,6 +14,7 @@ import SwiftUI
     
 }
 
+//A struct for the header, which contains a search bar and notification bell.
 struct Header: View {
     
     @FocusState.Binding var isSearching: Bool
@@ -21,6 +23,8 @@ struct Header: View {
     var body: some View {
         
         HStack {
+            
+            //HStack for the search bar.
             HStack {
                 Image(systemName: "magnifyingglass")
                     .resizable()
@@ -38,7 +42,7 @@ struct Header: View {
                     .opacity(0.5)
             )
             
-            
+            //Notifications tab (not implemented yet).
             Image(systemName: "bell")
                 .resizable()
                 .frame(width: 20, height: 20)
